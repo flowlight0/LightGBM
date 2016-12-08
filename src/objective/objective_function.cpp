@@ -3,6 +3,8 @@
 #include "binary_objective.hpp"
 #include "rank_objective.hpp"
 #include "multiclass_objective.hpp"
+#include "fair_objective.hpp"
+
 
 namespace LightGBM {
 
@@ -15,6 +17,8 @@ ObjectiveFunction* ObjectiveFunction::CreateObjectiveFunction(const std::string&
     return new LambdarankNDCG(config);
   } else if (type == std::string("multiclass")) {
     return new MulticlassLogloss(config);
+  } else if (type == std::string("logmae")) {
+    return new LogL1loss(config);
   }
   return nullptr;
 }
